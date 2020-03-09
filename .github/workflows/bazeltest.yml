@@ -29,6 +29,8 @@ jobs:
         run: |
           wget https://github.com/bazelbuild/bazel/releases/download/0.26.0/bazel_0.26.0-linux-x86_64.deb
           sudo dpkg -i bazel_0.26.0-linux-x86_64.deb
+      - name: Run lscpu
+        run: lscpu
       - name: Run C++ tests
         run: bazel test --config=avx tests:all
       - name: Run sample simulation
