@@ -19,7 +19,7 @@ jobs:
   # Run tests with Bazel v0.26.
   test:
     name: Test with Bazel
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-16.04
 
     steps:
       - uses: actions/checkout@v2
@@ -29,8 +29,10 @@ jobs:
         run: |
           wget https://github.com/bazelbuild/bazel/releases/download/0.26.0/bazel_0.26.0-linux-x86_64.deb
           sudo dpkg -i bazel_0.26.0-linux-x86_64.deb
-      - name: Run lscpu
-        run: lscpu
+      - name: Check for .bazelrc contents.
+        run: |
+          ls /etc/
+          cat /etc/bazel.bazelrc
       - name: Run C++ tests
         run: bazel test --config=avx tests:all
       - name: Run sample simulation
